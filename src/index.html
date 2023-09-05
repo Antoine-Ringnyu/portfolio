@@ -1,0 +1,265 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-   scale=1.0">
+
+  
+  <script src="../node_modules/alpinejs/dist/cdn.js" defer></script>
+  <!-- <script src="../node_modules/alpinejs/dist/alpine.js" defer></script> -->
+  
+  <link href="/dist/output.css" rel="stylesheet">
+
+  <title>Antoin3</title>
+</head>
+
+<body class="text-gray-800 font-normal " >
+ <div x-data="{ openMenu : false }"
+ :class="openMenu ? 'overflow-hidden' : 'overflow-visible' ">
+  <style>
+    [x-cloak] {
+      display: none !important;
+    }
+  </style>
+
+  <header class="flex justify-between items-center bg-white drop-shadow-sm py-4 px-8">
+
+    <!-- Logo -->
+    <a href="/" class="text-lg font-bold">Logo</a>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="flex md:hidden flex-col items-center align-middle" @click="openMenu = !openMenu"
+      :aria-expanded="openMenu" aria-controls="mobile-navigation" aria-label="Navigation Menu">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <span class="text-xs">Menu</span>
+    </button>
+
+    <!-- Main Navigations -->
+    <nav class="hidden md:flex">
+
+      <ul class="flex flex-row gap-2">
+        <li>
+          <a href="#" class="inline-flex py-2 px-3 bg-slate-200 rounded" aria-current="true">Home</a>
+        </li>
+        <li>
+          <a href="#" class="inline-flex py-2 px-3 hover:bg-slate-200 rounded">About</a>
+        </li>
+        <li>
+          <a href="#" class="inline-flex py-2 px-3 hover:bg-slate-200 rounded">Articles</a>
+        </li>
+        <li>
+          <a href="#" class="inline-flex py-2 px-3 hover:bg-slate-200 rounded">Contact</a>
+        </li>
+      </ul>
+
+    </nav>
+
+  </header>
+
+  <!-- Pop Out Navigation -->
+  <nav id="mobile-navigation" class="fixed top-0 right-0 bottom-0 left-0 backdrop-blur-sm z-10"
+    :class="openMenu ? 'visible' : 'invisible' " x-cloak>
+
+    <!-- UL Links -->
+    <ul class="absolute top-0 right-0 bottom-0 w-10/12 py-4 bg-white drop-shadow-2xl z-10 transition-all"
+      :class="openMenu ? 'translate-x-0' : 'translate-x-full'">
+
+      <li class="border-b border-inherit">
+        <a href="#" class="block p-4" aria-current="true">Home</a>
+      </li>
+      <li class="border-b border-inherit">
+        <a href="#" class="block p-4">About</a>
+      </li>
+      <li class="border-b border-inherit">
+        <a href="#" class="block p-4">Articles</a>
+      </li>
+      <li class="border-b border-inherit">
+        <a href="#" class="block p-4">Contact</a>
+      </li>
+
+    </ul>
+
+    <!-- Close Button -->
+    <button class="absolute top-0 right-0 bottom-0 left-0" @click="openMenu = !openMenu" :aria-expanded="openMenu"
+      aria-controls="mobile-navigation" aria-label="Close Navigation Menu">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute top-2 left-2" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+  </nav>
+ </div>
+
+  <!-- introduction -->
+  <section  id="introduction" class=" px-4 md:px-8 my-16 ">
+    <div class="max-w-md sm:max-w-fit sm:grid grid-rows-3 grid-flow-col sm:gap-x-4 mx-auto  bg-orange-00  relative px-2">
+      <div class="row-span-2 col-span-2 col-start-2 self-center ">
+        <h1 class="font-mono font-thin text-gray-500 text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3 mt-3 md:mt-0 pr-2">
+          Hi, I am <strong class="block font-bold text-4xl sm:text-5xl leading-10 font-sans text-gray-900">Ant<span class="text-orange-500">o</span>ine Ringnyu</strong>
+        </h1>
+      </div>
+      <div class="col-span-3 col-start-1 self-start sm:absolute bottom-7 z-10 bg-orange-500 mb-3 w-full pr-2">
+        <p class=" ml-auto text-right text-gray-800 px-2 font-normal text-base py-1 sm:py-0 sm:text-xl md:text-2xl max-w-xs  ">
+          Web Developer & System Maintenance
+        </p>
+      </div>
+      <div class="shadow-2xl inline-block rounded-e-full sm:rounded-md row-span-3 col-start-1 col-end-2 max-w-xs max-h-60 sm:max-h-80 mx-auto  relative z-40 overflow-hidden sm:ml-8">
+        <img class="object-cover border-l-orange-700 border-l-8 border  sm:border-0 block w-full  " src="../images/antoine-alternative.jpg" alt="Antoine">
+      </div>
+    </div>
+  </section>
+
+  <!-- my services -->
+  <section id="my-services" class="bg-orange-900 bg-cover border bg-center bg-no-repeat text-gray-100 py-16 px-4 md:px-8 bg-blend-multiply" style="background-image: url('../images/programmer.jpeg')">
+    <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold mb-8 text-center text-orange-500">What I Do</h2>
+    <div class="container mx-auto max-w-md sm:max-w-5xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div>
+        <h3 class="text-xl md:text-2xl font-semibold mb-4">Web Developer</h3>
+        <p class="text-sm md:text-base">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+          Incidunt omnis at mollitia a ut sequi!
+        </p>
+      </div> 
+  
+      <div>
+        <h3 class="text-xl md:text-2xl font-semibold mb-4">Web Developer</h3>
+        <p class="text-sm md:text-base">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+          Praesentium recusandae iusto a asperiores deleniti maiores optio numquam 
+          dicta natus, ab sint odio suscipit eligendi, soluta culpa commodi, perferendis perspiciatis illum?
+        </p>
+      </div> 
+  
+      <div>
+        <h3 class="text-xl md:text-2xl font-semibold mb-4">Web Developer</h3>
+        <p class="text-sm md:text-base">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+          Praesentium recusandae iusto a asperiores deleniti maiores optio numquam 
+          dicta natus, ab sint odio suscipit eligendi, soluta culpa commodi, perferendis perspiciatis illum?
+        </p>
+      </div> 
+    </div>
+  
+    <div class="mx-auto text-center  mt-8">
+      <a href="#" class="text-gray-900 text-base tracking-wide font-semibold mx-auto inline-block hover:underline bg-orange-500 px-4 rounded-sm py-1">My Work</a>
+    </div>
+  </section>
+  
+
+  <!-- about me -->
+  <section class="py-16 px-4 md:px-8 ">
+    <div class="container mx-auto justify-center max-w-md sm:max-w-3xl sm:grid grid-cols-[minmax(300px,28rem),minmax(150px,auto)] gap-x-4 relative">
+      <div class=" mx-auto">
+        <div class=" mb-4 row-span-1 ">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold">Who I Am</h2>
+        </div>
+        <div class="absolute  block z-10 w-full mb-4 row-span-1 ">
+          <p class=" md:text-base bg-orange-500 px-2 py-1 text-base">Lorem ipsum dolor sit amet.</p>
+        </div>
+      
+        <div class=" mb-8 mt-16 sm:mt-20 row-span-1">
+          <p class="text-sm md:text-base mb-4">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
+            Illo eum veniam voluptas a, sapiente possimus magni corporis recusandae, 
+            similique modi sequi necessitatibus eos at eaque?
+          </p>
+          <p class="text-sm md:text-base mb-4">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Ipsum, rerum in ut laudantium illo ipsa placeat alias magnam deserunt totam unde repellat sapiente?
+          </p>
+        </div>
+      </div>
+    
+      <div class=" relative z-40 sm:row-span-full col-start-2 sm:mr-4 mx-auto max-h-96 overflow-hidden rounded-md shadow-xl shadow-gray-300">
+        <img src="../images/antoine-full.jpg" alt="Antoine" class="w-full block mx-auto ">
+      </div>
+    </div>
+    
+  </section>
+  
+
+  <!-- my work -->
+  <section id="my-work" class="bg-orange-900 bg-cover border bg-center bg-no-repeat text-gray-100 py-16 px-4 md:px-8 bg-blend-multiply" style="background-image: url('../images/seating\ outside\ and\ working\ on\ the\ project.jpeg')">
+    <h2 class=" text-3xl md:text-4xl lg:text-5xl font-semibold mb-8 text-center text-gray-100">My Work</h2>
+  
+    <div class="container mx-auto justify-center max-w-md sm:max-w-3xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <!-- Portfolio Item 1 -->
+      <div class="relative overflow-hidden rounded-lg shadow">
+        <a href="#">
+          <img src="../images/Antoine.jpg" alt="Portfolio Item 1" class="w-full h-auto">
+        </a>
+        <div class="p-4">
+          <h3 class="text-lg font-semibold">Project Title 1</h3>
+          <p class="text-sm text-gray-500">Description of Project 1.</p>
+        </div>
+      </div>
+  
+      <!-- Portfolio Item 2 -->
+      <div class="relative overflow-hidden rounded-lg shadow">
+        <a href="#">
+          <img src="../images/Antoine.jpg" alt="Portfolio Item 2" class="w-full h-auto">
+        </a>
+        <div class="p-4">
+          <h3 class="text-lg font-semibold">Project Title 2</h3>
+          <p class="text-sm text-gray-500">Description of Project 2.</p>
+        </div>
+      </div>
+  
+      <!-- Portfolio Item 3 -->
+      <div class="relative overflow-hidden rounded-lg shadow">
+        <a href="#">
+          <img src="../images/Antoine.jpg" alt="Portfolio Item 3" class="w-full h-auto">
+        </a>
+        <div class="p-4">
+          <h3 class="text-lg font-semibold">Project Title 3</h3>
+          <p class="text-sm text-gray-500">Description of Project 3.</p>
+        </div>
+      </div>
+  
+      <div class="relative overflow-hidden rounded-lg shadow">
+        <a href="#">
+          <img src="../images/Antoine.jpg" alt="Portfolio Item 2" class="w-full h-auto">
+        </a>
+        <div class="p-4">
+          <h3 class="text-lg font-semibold">Project Title 2</h3>
+          <p class="text-sm text-gray-500">Description of Project 2.</p>
+        </div>
+      </div>
+
+      <div class="relative overflow-hidden rounded-lg shadow">
+        <a href="#">
+          <img src="../images/Antoine.jpg" alt="Portfolio Item 2" class="w-full h-auto">
+        </a>
+        <div class="p-4">
+          <h3 class="text-lg font-semibold">Project Title 2</h3>
+          <p class="text-sm text-gray-500">Description of Project 2.</p>
+        </div>
+      </div>
+      <!-- Add more portfolio items as needed -->
+    </div>
+  </section>
+  
+
+  <!-- footer -->
+  <footer>
+    <a href="mailto:#">ntaryikeantoine@gmail.com</a>
+    <ul>
+      <li>
+        <a href="http://#">a</a>
+      </li>
+      <li>
+        <a href="http://#">b</a>
+      </li>
+      <li>
+        <a href="http://#">c</a>
+      </li>
+      <li>
+        <a href="http://#">d</a>
+      </li>
+    </ul>
+  </footer>
+</body>
+</html>
