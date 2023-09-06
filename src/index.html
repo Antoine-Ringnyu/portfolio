@@ -11,98 +11,66 @@
   <link href="/dist/output.css" rel="stylesheet">
 
   <title>Antoin3</title>
+
+  <style>
+    .sticky-navbar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+    .active-link {
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        color: #F59E0B; /* Orange-500 */
+    }
+  </style>
 </head>
 
 <body class="text-gray-800 font-normal " >
- <div x-data="{ openMenu : false }"
- :class="openMenu ? 'overflow-hidden' : 'overflow-visible' ">
-  <style>
-    [x-cloak] {
-      display: none !important;
-    }
-  </style>
 
-  <header class="flex justify-between items-center bg-white drop-shadow-sm py-4 px-8">
-
-    <!-- Logo -->
-    <a href="/" class="text-lg font-bold">Logo</a>
-
-    <!-- Mobile Menu Toggle -->
-    <button class="flex md:hidden flex-col items-center align-middle" @click="openMenu = !openMenu"
-      :aria-expanded="openMenu" aria-controls="mobile-navigation" aria-label="Navigation Menu">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-      <span class="text-xs">Menu</span>
-    </button>
-
-    <!-- Main Navigations -->
-    <nav class="hidden md:flex">
-
-      <ul class="flex flex-row gap-2">
-        <li>
-          <a href="#" class="inline-flex py-2 px-3 bg-slate-200 rounded" aria-current="true">Home</a>
-        </li>
-        <li>
-          <a href="#" class="inline-flex py-2 px-3 hover:bg-slate-200 rounded">About</a>
-        </li>
-        <li>
-          <a href="#" class="inline-flex py-2 px-3 hover:bg-slate-200 rounded">Articles</a>
-        </li>
-        <li>
-          <a href="#" class="inline-flex py-2 px-3 hover:bg-slate-200 rounded">Contact</a>
-        </li>
-      </ul>
-
-    </nav>
-
-  </header>
-
-  <!-- Pop Out Navigation -->
-  <nav id="mobile-navigation" class="fixed top-0 right-0 bottom-0 left-0 backdrop-blur-sm z-10"
-    :class="openMenu ? 'visible' : 'invisible' " x-cloak>
-
-    <!-- UL Links -->
-    <ul class="absolute top-0 right-0 bottom-0 w-10/12 py-4 bg-white drop-shadow-2xl z-10 transition-all"
-      :class="openMenu ? 'translate-x-0' : 'translate-x-full'">
-
-      <li class="border-b border-inherit">
-        <a href="#" class="block p-4" aria-current="true">Home</a>
-      </li>
-      <li class="border-b border-inherit">
-        <a href="#" class="block p-4">About</a>
-      </li>
-      <li class="border-b border-inherit">
-        <a href="#" class="block p-4">Articles</a>
-      </li>
-      <li class="border-b border-inherit">
-        <a href="#" class="block p-4">Contact</a>
-      </li>
-
-    </ul>
-
-    <!-- Close Button -->
-    <button class="absolute top-0 right-0 bottom-0 left-0" @click="openMenu = !openMenu" :aria-expanded="openMenu"
-      aria-controls="mobile-navigation" aria-label="Close Navigation Menu">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute top-2 left-2" fill="none" viewBox="0 0 24 24"
-        stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-      </svg>
-    </button>
-
-  </nav>
- </div>
+  <div x-data="{ open: false, isMobile: window.innerWidth <= 640 }" x-init="() => { window.addEventListener('resize', () => { isMobile = window.innerWidth <= 640 }); }" class="sticky-navbar py-1 sm:py-4 shadow-md bg-gray-800 ">
+    <div class="container max-w-md sm:max-w-5xl mx-auto text-orange-500">
+        <div class="flex justify-between items-center px-4">
+            <a class="hover:bg-gray-900 hover:text-white bg-white font-bold font-mono text-gray-950 rounded" href="index.html">
+                <div class="p-2 text-2xl">Tech<span class="text-red-600">Rx</span></div>
+            </a>
+            
+            <!-- Desktop navigation -->
+            <div class="hidden sm:flex text-sm gap-5 sm:text-lg">
+                <a :class="{ 'active-link': isActive('index.html') }" href="index.html">Home</a>
+                <a :class="{ 'active-link': isActive('#my-services') }" href="#my-services">What I do</a>
+                <a :class="{ 'active-link': isActive('#about-me') }" href="#about-me">About me</a>
+            </div>
+            
+            <!-- Hamburger menu button (visible on mobile) -->
+            <button @click="open = !open" class="text-white sm:hidden">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Mobile menu (visible on mobile) -->
+        <div x-show="open && isMobile" @click.away="open = false" class="sm:hidden">
+            <div class="flex flex-col text-sm gap-3 p-4 bg-gray-900">
+                <a :class="{ 'active-link': isActive('index.html') }" href="index.html">Home</a>
+                <a :class="{ 'active-link': isActive('#my-services') }" href="#my-services">What I do</a>
+                <a :class="{ 'active-link': isActive('#about-me') }" href="#about-me">About me</a>
+            </div>
+        </div>
+    </div>
+</div>
 
   <!-- introduction -->
   <section  id="introduction" class=" px-4 md:px-8 py-16 md:py-24 ">
     <div class="max-w-md sm:max-w-fit sm:grid grid-rows-3 grid-flow-col sm:gap-x-4 mx-auto  bg-orange-00  relative px-2">
       <div class="row-span-2 col-span-2 col-start-2 self-center ">
         <h1 class="font-mono font-thin text-gray-500 text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3 mt-3 md:mt-0 pr-2">
-          Hi, I am <strong class="block font-bold text-4xl sm:text-5xl leading-10 font-sans text-gray-900">Ant<span class="text-orange-500">o</span>ine Ringnyu</strong>
+          Hi, I am <strong class="block font-bold text-4xl sm:text-5xl leading-10 font-sans text-gray-800">Ant<span class="text-orange-600">o</span>ine Ringnyu</strong>
         </h1>
       </div>
       <div class="col-span-3 col-start-1 self-start sm:absolute bottom-7 z-10 bg-orange-500 mb-3 w-full pr-2">
-        <p class=" ml-auto text-right text-gray-800 px-2 font-normal text-base py-1 sm:py-0 sm:text-xl md:text-2xl max-w-xs  ">
+        <p class=" ml-auto text-right text-orange-950 px-2 font-medium text-base py-1 sm:py-0 sm:text-xl md:text-2xl max-w-xs  ">
           Web Developer & System Maintenance
         </p>
       </div>
@@ -117,58 +85,51 @@
     <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold mb-8  text-center text-orange-500">What I Do</h2>
     <div class="container mx-auto max-w-md sm:max-w-5xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:my-12">
       <div>
-        <h3 class="text-xl md:text-2xl font-semibold mb-4">Web Developer</h3>
+        <h3 class="text-xl md:text-2xl font-semibold mb-4 bg-orange-600 bg-opacity-10 px-2">Web Developer</h3>
         <p class="text-sm md:text-base">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-          Incidunt omnis at mollitia a ut sequi!
+          I believe that a website is more than just a digital presence; it's an immersive experience that leaves a lasting impression. From responsive design to seamless user interfaces, I ensure your web projects shine.
         </p>
       </div> 
   
       <div>
-        <h3 class="text-xl md:text-2xl font-semibold mb-4">Web Developer</h3>
+        <h3 class="text-xl md:text-2xl font-semibold mb-4  bg-orange-600 bg-opacity-10 px-2">System Maintenance</h3>
         <p class="text-sm md:text-base">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-          Praesentium recusandae iusto a asperiores deleniti maiores optio numquam 
-          dicta natus, ab sint odio suscipit eligendi, soluta culpa commodi, perferendis perspiciatis illum?
+          I take on the role of a system maintenance maestro, ensuring that your digital infrastructure operates seamlessly. My watchful eye and proactive approach prevent disruptions and keep your systems running smoothly.
         </p>
       </div> 
   
       <div>
-        <h3 class="text-xl md:text-2xl font-semibold mb-4">Web Developer</h3>
+        <h3 class="text-xl md:text-2xl font-semibold mb-4  bg-orange-600 bg-opacity-10 px-2"> User Experience Enthusiast</h3>
         <p class="text-sm md:text-base">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-          Praesentium recusandae iusto a asperiores deleniti maiores optio numquam 
-          dicta natus, ab sint odio suscipit eligendi, soluta culpa commodi, perferendis perspiciatis illum?
+          User-centric design is the backbone of any successful project. I immerse myself in the user's perspective, striving to create intuitive and delightful experiences. It's not just about features; it's about how users feel when they interact with your digital products.
         </p>
       </div> 
     </div>
   
     <div class="mx-auto text-center  mt-8">
-      <a href="#" class="text-gray-900 text-base tracking-wide font-semibold mx-auto inline-block hover:underline bg-orange-500 px-4 rounded-sm py-1">My Work</a>
+      <a href="#my-work" class="text-gray-900 text-base tracking-wide font-semibold mx-auto inline-block hover:underline bg-orange-500 px-4 rounded-sm py-1">My Work</a>
     </div>
   </section>
   
 
   <!-- about me -->
-  <section class="py-16 px-4 md:px-8 md:py-24">
+  <section id="about-me" class="py-16 px-4 md:px-8 md:my-24">
     <div class="container mx-auto justify-center max-w-md sm:max-w-3xl sm:grid grid-cols-[minmax(300px,28rem),minmax(150px,auto)] gap-x-4 relative">
       <div class=" mx-auto">
         <div class=" mb-4 row-span-1 ">
-          <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold">Who I Am</h2>
+          <h2 class="text-4xl md:text-5xl lg:text-5xl font-semibold">Who I Am</h2>
         </div>
-        <div class="absolute  block z-10 w-full mb-4 row-span-1 ">
-          <p class=" md:text-base bg-orange-500 px-2 py-1 text-base">Lorem ipsum dolor sit amet.</p>
+        <div class="absolute  bg-orange-500 block z-10 w-full mb-4 row-span-1 px-2 ">
+          <p class=" md:text-xl text-orange-950  py-1 text-base font-bold max-w-md text-left">Developer & System Maintenance based in Yaounde/Cameroon</p>
         </div>
       
-        <div class=" mb-8 mt-16 sm:mt-20 row-span-1">
+        <div class=" mb-8 mt-24 sm:mt-20 row-span-1">
           <p class="text-sm md:text-base mb-4">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-            Illo eum veniam voluptas a, sapiente possimus magni corporis recusandae, 
-            similique modi sequi necessitatibus eos at eaque?
+            <strong>I am</strong> Antoine Ringnyu, a passionate Developer and System Maintenance specialist based in the vibrant city of Yaoundé, Cameroon. <br class="mb-5">
+            <strong>My goal</strong> is to make technology accessible and valuable for businesses and individuals alike.
           </p>
           <p class="text-sm md:text-base mb-4">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Ipsum, rerum in ut laudantium illo ipsa placeat alias magnam deserunt totam unde repellat sapiente?
+            <strong>I believe</strong> that great software is more than functionality; it's an art form. With each project, I strive for elegance in design, efficiency in execution, and user-centricity in every detail
           </p>
         </div>
       </div>
@@ -183,7 +144,8 @@
 
   <!-- my work -->
   <section id="my-work" class="bg-orange-900 bg-cover border bg-center bg-no-repeat text-gray-100 py-16 px-4 md:px-8 bg-blend-multiply" style="background-image: url('../images/seating\ outside\ and\ working\ on\ the\ project.jpeg')">
-    <h2 class=" text-3xl md:text-4xl lg:text-5xl font-semibold mb-8 text-center text-gray-100">My Work</h2>
+    <h2 class=" text-3xl md:text-4xl lg:text-5xl font-semibold mb-4 text-center text-gray-100">My Work</h2>
+    <p class="text-center text-orange-300 text-lg font-thin mb-8">A selection of my range of work</p>
   
     <div class="container mx-auto  max-w-xs sm:max-w-3xl grid auto-cols-fr gap-y-12 gap-8 grid-flow-row-dense sm:grid-cols-2 md:grid-cols-3 gap-x-4">
       <!-- Portfolio Item 1 -->
@@ -215,23 +177,43 @@
   </section>
   
 
-  <!-- footer -->
-  <footer>
-    <a href="mailto:#">ntaryikeantoine@gmail.com</a>
-    <ul>
-      <li>
-        <a href="http://#">a</a>
-      </li>
-      <li>
-        <a href="http://#">b</a>
-      </li>
-      <li>
-        <a href="http://#">c</a>
-      </li>
-      <li>
-        <a href="http://#">d</a>
-      </li>
-    </ul>
-  </footer>
+  <footer class="bg-orange-950 text-white py-8 pb-12">
+    <div class="container max-w-md sm:max-w-5xl mx-auto px-4 sm:px-8 flex flex-col sm:flex-row justify-between items-center space-x-10">
+        <!-- Contact Info -->
+        <div class="text-center sm:text-left mb-4 sm:mb-0">
+            <p class="text-lg sm:text-5xl font-semibold text-orange-400 mb-6">Contact</p>
+            <div class="flex items-center space-x-2 mb-4">
+              <p class="text-xl text-orange-400">mail</p>
+              <a href="mailto:ntaryikeantoine@gmail.com" class="text-blue-300 hover:underline text-lg">
+                  ntaryikeantoine@gmail.com
+              </a>
+            </div>
+            <div class="flex items-center space-x-2 mb-4">
+              <p class="text-xl text-orange-400">Tel</p>
+              <a href="#" class="text-blue-300 hover:underline text-lg">
+                  +237 652 605 131
+              </a>
+            </div>
+            
+        </div>
+
+        <!-- Social Media Links -->
+        <ul class="flex justify-center space-x-4">
+            <li class="
+            ">
+              <p class="max-w-md text-sm font-sans font-thin text-gray-200">
+                Together, we can turn your ideas into reality. Feel free to reach out; I'm always up for a good conversation.
+              </p>
+                <a href="http://#" class="text-blue-300 hover:underline text-xs">Designed by Ntaryike Antoine</a>
+            </li>
+           
+        </ul>
+    </div>
+</footer>
+<script>
+  function isActive(page) {
+      return window.location.href.includes(page);
+  }
+</script>
 </body>
 </html>
